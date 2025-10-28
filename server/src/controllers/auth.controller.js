@@ -28,7 +28,7 @@ export const loginUser = async (req, res, next) => {
     const user = identifier.includes("@") ? await User.findOne({ email }) : await User.findOne({ username });
 
     if (!user || !bcrypt.compare(password, user.password)) {
-      return new AppError(400, "Invalid Credentials");
+      return next(new AppError(400, "Invalid Credentials"));
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
