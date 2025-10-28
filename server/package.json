@@ -11,10 +11,11 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@clerk/express": "^1.7.42",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
     "socket.io": "^4.8.1"
   }

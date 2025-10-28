@@ -3,8 +3,8 @@ import http from "http";
 import { Server as SocketIO } from "socket.io";
 import cors from "cors";
 import dotenv from "dotenv";
-import { clerkMiddleware, requireAuth } from "@clerk/express";
 import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.route.js";
 
 dotenv.config({ quiet: true });
 
@@ -20,7 +20,7 @@ const io = new SocketIO(server);
 
 app.use(express.json());
 app.use(cors());
-app.use(clerkMiddleware());
+app.use("/api/auth", authRoutes);
 
 io.on("connection", (socket) => {
   socket.username = socket.handshake.auth.username;
