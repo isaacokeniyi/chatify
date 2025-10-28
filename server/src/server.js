@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
+import errorHandler from "./middleware/error.middleware.js";
 
 dotenv.config({ quiet: true });
 
@@ -21,6 +22,8 @@ const io = new SocketIO(server);
 app.use(express.json());
 app.use(cors());
 app.use("/api/auth", authRoutes);
+
+app.use(errorHandler);
 
 io.on("connection", (socket) => {
   socket.username = socket.handshake.auth.username;
