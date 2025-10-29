@@ -1,4 +1,5 @@
 import Message from "../model/messageSchema.js";
+import AppError from "../utils/AppError.js";
 
 export const fetchMessages = async (req, res, next) => {
   try {
@@ -26,7 +27,12 @@ export const deleteMessages = async (req, res, next) => {
   try {
     const io = req.app.get("io");
     const { id } = req.params;
-    const deletedMessage = await Message.findByIdAndUpdate(id, { deleted: true }, { new: true });
+    const user = req.user;
+    const deletedMessage = await Message.findById(id);
+
+    if (!deletedMessage || deletedMessage.senderId !== user) return next(new AppError(404, "Message Not Found"));
+    await Message.findByIdAndUpdate(id, { deleted: true }, { new: true });
+
     io.emit("deleteMessage", deletedMessage);
     res.json({ message: "Message deleted" });
   } catch (err) {
