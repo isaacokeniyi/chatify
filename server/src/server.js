@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
+import usersRoutes from "./routes/users.route.js";
 import messagesRoutes from "./routes/messages.route.js";
 import errorHandler from "./middleware/error.middleware.js";
 
@@ -25,6 +26,7 @@ app.set("io", io);
 app.use(express.json());
 app.use(cors());
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
 app.use("/api/chat", messagesRoutes);
 
 app.use(errorHandler);
