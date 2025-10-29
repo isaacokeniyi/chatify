@@ -25,7 +25,9 @@ export const registerUser = async (req, res, next) => {
 export const loginUser = async (req, res, next) => {
   try {
     const { identifier, password } = req.body;
-    const user = identifier.includes("@") ? await User.findOne({ email }) : await User.findOne({ username });
+    const user = identifier.includes("@")
+      ? await User.findOne({ email: identifier })
+      : await User.findOne({ username: identifier });
 
     if (!user || !bcrypt.compare(password, user.password)) {
       return next(new AppError(400, "Invalid Credentials"));
