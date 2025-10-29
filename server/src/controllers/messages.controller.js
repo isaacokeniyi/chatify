@@ -13,7 +13,8 @@ export const fetchMessages = async (req, res, next) => {
 export const sendMessages = async (req, res, next) => {
   try {
     const io = req.app.get("io");
-    const { senderId, sender, message } = req.body;
+    const senderId = req.user;
+    const { sender, message } = req.body;
     const newMessage = new Message({ senderId, sender, message });
     await newMessage.save();
     io.emit("newMessage", newMessage);
