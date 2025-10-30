@@ -12,6 +12,12 @@ const errorHandler = (err, req, res, next) => {
   } else if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     status = 400;
     payload = { status: "fail", message: "Malformed JSON Body" };
+  } else if (err.name === "JsonWebTokenError") {
+    status = 401;
+    payload = { status: "fail", message: "Invalid Token" };
+  } else if (err.name === "TokenExpiredError") {
+    status = 401;
+    payload = { status: "fail", message: "Login Timeout" };
   } else if (err.status && err.message) {
     status = err.status;
     payload = { status: status >= 500 ? "error" : "fail", message: err.message };
