@@ -8,7 +8,7 @@ export const deleteUser = async (req, res, next) => {
     if (!user) return next(new AppError(404, "User Not Found"));
 
     await User.findByIdAndDelete(id);
-    res.end({ message: "Account deleted" });
+    res.end("Account deleted");
   } catch (err) {
     next(err);
   }
