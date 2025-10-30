@@ -3,21 +3,25 @@ import AppError from "../utils/AppError.js";
 import User from "../model/userSchema.js";
 
 const authenticateToken = async (req, res, next) => {
-  const authHeader = req.headers.authorisation;
+  try {
+    const authHeader = req.headers.authorisation;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) return res.status(401).json({ message: "Please Login" });
+    if (!authHeader || !authHeader.startsWith("Bearer ")) return res.status(401).json({ message: "Please Login" });
 
-  const token = authHeader.split(" ")[1];
-  const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const token = authHeader.split(" ")[1];
+    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-  if (!payload.id) return next(new AppError(401, "Invalid Token"));
+    if (!payload.id) return next(new AppError(401, "Invalid Token"));
 
-  const user = await User.findById(payload.id);
-  if (!user) return next(new AppError(404, "User Not Found"));
+    const user = await User.findById(payload.id);
+    if (!user) return next(new AppError(404, "User Not Found"));
 
-  req.user = user._id.toString();
+    req.user = user._id.toString();
 
-  return next();
+    return next();
+  } catch (err) {
+    next(err);
+  }
 };
 
 export default authenticateToken;
