@@ -24,7 +24,7 @@ export const sendMessages = async (req, res, next) => {
     const newMessage = new Message({ senderId, sender, message });
     await newMessage.save();
     const { senderId: sId, ...rest } = newMessage;
-    io.emit("newMessage", ...rest);
+    io.emit("newMessage", rest);
     res.status(201).json({ message: "Message sent" });
   } catch (err) {
     next(err);
