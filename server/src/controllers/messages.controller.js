@@ -3,8 +3,14 @@ import AppError from "../utils/AppError.js";
 
 export const fetchMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find();
-    res.json(messages);
+    const messages = await Message.find({});
+
+    const formattedMessages = messages.map((msg) => {
+      const { _id, sender, message, deleted, createdAt } = msg;
+      return { _id, sender, deleted, message: deleted ? "This message has been deleted" : message, createdAt };
+    });
+
+    res.json(formattedMessages);
   } catch (err) {
     next(err);
   }
@@ -17,7 +23,8 @@ export const sendMessages = async (req, res, next) => {
     const { sender, message } = req.body;
     const newMessage = new Message({ senderId, sender, message });
     await newMessage.save();
-    io.emit("newMessage", newMessage);
+    const { senderId: sId, ...rest } = newMessage;
+    io.emit("newMessage", ...rest);
     res.status(201).json({ message: "Message sent" });
   } catch (err) {
     next(err);
