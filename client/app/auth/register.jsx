@@ -4,7 +4,7 @@ export function meta() {
   return [{ title: "Sign up for Chatify" }, { name: "description", content: "The sign up page for chatify" }];
 }
 
-export default function Register() {
+export const Register = () => {
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
@@ -62,4 +62,4 @@ export default function Register() {
       </p>
     </main>
   );
-}
+};

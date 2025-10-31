@@ -4,7 +4,7 @@ export function meta() {
   return [{ title: "Sign in to Chatify" }, { name: "description", content: "The sign in page for chatify" }];
 }
 
-export default function Login() {
+export const Login = () => {
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
@@ -46,4 +46,4 @@ export default function Login() {
       </p>
     </main>
   );
-}
+};
