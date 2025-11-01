@@ -13,8 +13,28 @@ const Chat = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (!token) navigate("/login");
+    const fetchChat = async () => {
+      try {
+        let token = localStorage.getItem("token");
+        if (!token) return navigate("/login");
+
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          navigate("/login");
+          return toast.error(data.message);
+        }
+
+        console.log(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchChat();
   }, []);
 
   const handleLogout = () => {
@@ -25,8 +45,10 @@ const Chat = () => {
 
   return (
     <main>
-      Global Chat
-      <button onClick={handleLogout}>Log out</button>
+      <div>
+        Global Chat
+        <button onClick={handleLogout}>Log out</button>
+      </div>
     </main>
   );
 };

@@ -4,7 +4,7 @@ import User from "../model/userSchema.js";
 
 const authenticateToken = async (req, res, next) => {
   try {
-    const authHeader = req.headers.authorisation;
+    const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) return res.status(401).json({ message: "Please Login" });
 
