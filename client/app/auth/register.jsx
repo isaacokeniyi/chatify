@@ -1,14 +1,48 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export function meta() {
   return [{ title: "Sign up for Chatify" }, { name: "description", content: "The sign up page for chatify" }];
 }
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [logMeIn, setLogMeIn] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password, logMeIn }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return toast.error(data.message);
+      }
+      toast.success(data.message);
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        navigate("/chat");
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className="block text-gray-700">
             Username
@@ -16,6 +50,8 @@ const Register = () => {
           <input
             type="text"
             id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="john doe"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -27,6 +63,8 @@ const Register = () => {
           <input
             type="text"
             id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@example.com"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -36,14 +74,16 @@ const Register = () => {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div className="flex items-center gap-2">
-          <input type="checkbox" id="logMeIn" />
+          <input type="checkbox" id="logMeIn" checked={logMeIn} onChange={(e) => setLogMeIn(e.target.checked)} />
           <label htmlFor="logMeIn">Log Me In</label>
         </div>
 
