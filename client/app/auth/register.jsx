@@ -41,7 +41,7 @@ const Register = () => {
 
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN UP</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className="block text-gray-700">
