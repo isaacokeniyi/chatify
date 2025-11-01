@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export function meta() {
   return [{ title: "Sign in to Chatify" }, { name: "description", content: "The sign in page for chatify" }];
@@ -21,9 +22,9 @@ const Login = () => {
 
       const data = await res.json();
       if (!res.ok) {
-        return console.log(data.message);
+        return toast.error(data.message);
       }
-
+      toast.success(data.message);
       localStorage.setItem("token", data.token);
       navigate("/chat");
     } catch (error) {

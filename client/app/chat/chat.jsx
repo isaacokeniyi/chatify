@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export function meta() {
   return [
@@ -19,6 +20,7 @@ const Chat = () => {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
+    toast.success("Successfully Logged Out");
   };
 
   return (
