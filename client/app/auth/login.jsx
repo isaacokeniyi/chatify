@@ -1,14 +1,40 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 export function meta() {
   return [{ title: "Sign in to Chatify" }, { name: "description", content: "The sign in page for chatify" }];
 }
 
 const Login = () => {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return console.log(data.message);
+      }
+
+      localStorage.setItem("token", data.token);
+      navigate("/chat");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="username" className="block text-gray-700">
             Username or Email
@@ -16,6 +42,8 @@ const Login = () => {
           <input
             type="text"
             id="username"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
             placeholder="Enter your username or email"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -25,8 +53,10 @@ const Login = () => {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />

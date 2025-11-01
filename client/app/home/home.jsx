@@ -7,7 +7,7 @@ export function meta() {
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/login");
+    navigate("/chat");
   }, []);
 };
 
