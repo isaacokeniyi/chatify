@@ -28,7 +28,7 @@ export function Layout({ children }) {
       </head>
       <body>
         {children}
-        <ToastContainer autoClose={2500} newestOnTop />
+        <ToastContainer autoClose={3000} newestOnTop />
         <ScrollRestoration />
         <Scripts />
       </body>
