@@ -23,9 +23,8 @@ const Register = () => {
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        return toast.error(data.message);
-      }
+      if (!res.ok) return toast.error(data.message);
+
       toast.success(data.message);
 
       if (data.token) {
