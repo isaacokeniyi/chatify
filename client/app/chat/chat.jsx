@@ -28,8 +28,6 @@ const Chat = () => {
           navigate("/login");
           return toast.error(data.message);
         }
-
-        console.log(data);
       } catch (error) {
         console.error(error.message);
       }
