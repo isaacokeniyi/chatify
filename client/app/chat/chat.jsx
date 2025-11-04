@@ -51,11 +51,11 @@ const Chat = () => {
           Log out
         </button>
       </div>
-      <div className="h-6/8">
+      <div className="h-6/8 flex flex-col items-center gap-4 overflow-y-auto p-4">
         {messages.map((msg) => (
-          <div key={msg._id}>
-            <p>{msg.sender}</p>
-            <p>{msg.message}</p>
+          <div key={msg._id} className="max-w-3/5 rounded-sm flex flex-col self-start p-2">
+            <strong>{msg.sender}</strong>
+            <p className="wrap-break-word pr-4">{msg.message}</p>
           </div>
         ))}
       </div>
