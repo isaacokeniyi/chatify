@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
@@ -11,6 +11,7 @@ export function meta() {
 
 const Chat = () => {
   const navigate = useNavigate();
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -28,6 +29,7 @@ const Chat = () => {
           navigate("/login");
           return toast.error(data.message);
         }
+        setMessages(data);
       } catch (error) {
         console.error(error.message);
       }
@@ -49,7 +51,14 @@ const Chat = () => {
           Log out
         </button>
       </div>
-      <div className="h-6/8">Message box</div>
+      <div className="h-6/8">
+        {messages.map((msg) => (
+          <div key={msg._id}>
+            <p>{msg.sender}</p>
+            <p>{msg.message}</p>
+          </div>
+        ))}
+      </div>
       <form className="h-1/8 flex items-center justify-between px-12">
         <input type="text" placeholder="Write a message" className="w-17/20 h-12 rounded-lg px-4" />
         <button type="submit" className="px-4 py-2 rounded-md">
