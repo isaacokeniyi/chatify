@@ -42,11 +42,16 @@ const Chat = () => {
   };
 
   return (
-    <main>
-      <div>
+    <main className="h-screen flex flex-col">
+      <div className="h-1/8">
         Global Chat
         <button onClick={handleLogout}>Log out</button>
       </div>
+      <div className="h-9/12">Message box</div>
+      <form className="h-auto">
+        <input type="text" placeholder="Write a message" />
+        <button type="submit">SEND</button>
+      </form>
     </main>
   );
 };
