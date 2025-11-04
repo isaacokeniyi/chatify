@@ -43,9 +43,11 @@ const Chat = () => {
 
   return (
     <main className="h-screen flex flex-col">
-      <div className="h-1/8">
-        Global Chat
-        <button onClick={handleLogout}>Log out</button>
+      <div className="h-1/8 flex items-center justify-between px-12">
+        <p className="text-2xl"> Global Chat</p>
+        <button onClick={handleLogout} className="px-2 py-1 rounded-sm">
+          Log out
+        </button>
       </div>
       <div className="h-6/8">Message box</div>
       <form className="h-1/8 flex items-center justify-between px-12">
