@@ -47,10 +47,12 @@ const Chat = () => {
         Global Chat
         <button onClick={handleLogout}>Log out</button>
       </div>
-      <div className="h-9/12">Message box</div>
-      <form className="h-auto">
-        <input type="text" placeholder="Write a message" />
-        <button type="submit">SEND</button>
+      <div className="h-6/8">Message box</div>
+      <form className="h-1/8 flex items-center justify-between px-12">
+        <input type="text" placeholder="Write a message" className="w-17/20 h-12 rounded-lg px-4" />
+        <button type="submit" className="px-4 py-2 rounded-md">
+          SEND
+        </button>
       </form>
     </main>
   );
