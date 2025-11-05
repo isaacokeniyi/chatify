@@ -13,7 +13,7 @@ export const registerUser = async (req, res, next) => {
 
     if (logMeIn) {
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
-      res.json({ message: "Registration Successful", token });
+      res.json({ message: "Registration Successful", token, username });
     } else {
       res.status(201).json({ message: "Registration Successful" });
     }
@@ -33,8 +33,10 @@ export const loginUser = async (req, res, next) => {
       return next(new AppError(400, "Invalid Credentials"));
     }
 
+    const username = user.username;
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
-    res.json({ message: "Login Successful", token });
+    res.json({ message: "Login Successful", token, username });
   } catch (err) {
     next(err);
   }
