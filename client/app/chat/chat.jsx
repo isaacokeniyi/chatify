@@ -60,7 +60,9 @@ const Chat = () => {
             key={msg._id}
             className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === user ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
           >
-            <strong className={` ${msg.sender === user ? "text-[#4f0099]" : "text-[#9333ea]"}`}>{msg.sender}</strong>
+            <strong className={` ${msg.sender === user ? "text-[#4f0099]" : "text-[#9333ea]"}`}>
+              {msg.sender === user ? "You" : msg.sender}
+            </strong>
             <p className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"}`}>{msg.message}</p>
           </div>
         ))}
