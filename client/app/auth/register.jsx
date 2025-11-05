@@ -29,6 +29,7 @@ const Register = () => {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", data.username);
         navigate("/chat");
       } else {
         navigate("/login");

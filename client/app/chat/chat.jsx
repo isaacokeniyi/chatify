@@ -30,7 +30,9 @@ const Chat = () => {
           navigate("/login");
           return toast.error(data.message);
         }
+
         setMessages(data);
+        setUser(localStorage.getItem("user"));
       } catch (error) {
         console.error(error.message);
       }
@@ -56,12 +58,10 @@ const Chat = () => {
         {messages.map((msg) => (
           <div
             key={msg._id}
-            className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === "ADMIN" ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
+            className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === user ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
           >
-            <strong className={` ${msg.sender === "ADMIN" ? "text-[#4f0099]" : "text-[#9333ea]"}`}>{msg.sender}</strong>
-            <p className={`wrap-break-word pr-4 ${msg.sender === "ADMIN" ? "text-white" : "text-black"}`}>
-              {msg.message}
-            </p>
+            <strong className={` ${msg.sender === user ? "text-[#4f0099]" : "text-[#9333ea]"}`}>{msg.sender}</strong>
+            <p className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"}`}>{msg.message}</p>
           </div>
         ))}
       </div>

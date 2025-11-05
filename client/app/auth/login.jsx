@@ -25,6 +25,7 @@ const Login = () => {
 
       toast.success(data.message);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", data.username);
       navigate("/chat");
     } catch (error) {
       console.log(error.message);
