@@ -12,6 +12,7 @@ export function meta() {
 const Chat = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -51,11 +52,16 @@ const Chat = () => {
           Log out
         </button>
       </div>
-      <div className="h-6/8 flex flex-col items-center gap-4 overflow-y-auto p-4 bg-[#f4f6f8]">
+      <div className="h-6/8 flex flex-col items-center gap-4 overflow-y-auto p-4 bg-[#f4f6f8] w-screen">
         {messages.map((msg) => (
-          <div key={msg._id} className="max-w-3/5 rounded-sm flex flex-col self-start p-2 bg-[#e5e5ea]">
-            <strong className="text-[#9333ea]">{msg.sender}</strong>
-            <p className="wrap-break-word pr-4">{msg.message}</p>
+          <div
+            key={msg._id}
+            className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === "ADMIN" ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
+          >
+            <strong className={` ${msg.sender === "ADMIN" ? "text-[#4f0099]" : "text-[#9333ea]"}`}>{msg.sender}</strong>
+            <p className={`wrap-break-word pr-4 ${msg.sender === "ADMIN" ? "text-white" : "text-black"}`}>
+              {msg.message}
+            </p>
           </div>
         ))}
       </div>
