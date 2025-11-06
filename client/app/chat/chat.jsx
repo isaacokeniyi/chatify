@@ -11,7 +11,8 @@ export function meta() {
 
 const Chat = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [messagesList, setMessagesList] = useState([]);
   const [user, setUser] = useState("");
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const Chat = () => {
           return toast.error(data.message);
         }
 
-        setMessages(data);
+        setMessagesList(data);
         setUser(localStorage.getItem("user"));
       } catch (error) {
         console.error(error.message);
@@ -39,6 +40,31 @@ const Chat = () => {
     };
     fetchChat();
   }, []);
+
+  const handleMessage = async (e) => {
+    e.preventDefault();
+    try {
+      let token = localStorage.getItem("token");
+
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ sender: user, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        navigate("/login");
+        return toast.error(data.message);
+      }
+
+      setMessage("");
+      toast.success(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -55,7 +81,7 @@ const Chat = () => {
         </button>
       </div>
       <div className="h-6/8 flex flex-col items-center gap-4 overflow-y-auto p-4 bg-[#f4f6f8] w-screen">
-        {messages.map((msg) => (
+        {messagesList.map((msg) => (
           <div
             key={msg._id}
             className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === user ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
@@ -71,9 +97,11 @@ const Chat = () => {
           </div>
         ))}
       </div>
-      <form className="h-1/8 flex items-center justify-between px-12">
+      <form className="h-1/8 flex items-center justify-between px-12" onSubmit={handleMessage}>
         <input
           type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="Write a message"
           className="w-17/20 h-12 rounded-lg px-4 text-[#333333] border border-[#d1d5db]"
         />
