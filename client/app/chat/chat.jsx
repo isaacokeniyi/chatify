@@ -15,6 +15,7 @@ const Chat = () => {
   const [messagesList, setMessagesList] = useState([]);
   const [user, setUser] = useState("");
   const messageEndRef = useRef();
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -43,17 +44,24 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    if (messagesList.length > 0) scrollBottom();
+    if (messagesList.length > 0) {
+      if (firstLoad.current) {
+        scrollBottom("auto");
+        firstLoad.current = false;
+      } else {
+        scrollBottom("smooth", "check");
+      }
+    }
   }, [messagesList]);
 
-  const scrollBottom = () => {
+  const scrollBottom = (scrollBehavior, check) => {
     const container = messageEndRef.current?.parentElement;
     if (!container) return;
 
     const atBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 50;
 
-    if (atBottom) {
-      messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (atBottom || !check) {
+      messageEndRef.current?.scrollIntoView({ behavior: scrollBehavior });
     }
   };
 
