@@ -63,7 +63,11 @@ const Chat = () => {
             <strong className={` ${msg.sender === user ? "text-[#4f0099]" : "text-[#9333ea]"}`}>
               {msg.sender === user ? "You" : msg.sender}
             </strong>
-            <p className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"}`}>{msg.message}</p>
+            <p
+              className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"} ${msg.deleted ? "opacity-50" : ""}`}
+            >
+              {msg.message}
+            </p>
           </div>
         ))}
       </div>
