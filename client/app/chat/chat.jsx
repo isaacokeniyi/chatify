@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
@@ -14,6 +14,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   const [user, setUser] = useState("");
+  const messageEndRef = useRef();
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -40,6 +41,21 @@ const Chat = () => {
     };
     fetchChat();
   }, []);
+
+  useEffect(() => {
+    if (messagesList.length > 0) scrollBottom();
+  }, [messagesList]);
+
+  const scrollBottom = () => {
+    const container = messageEndRef.current?.parentElement;
+    if (!container) return;
+
+    const atBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 50;
+
+    if (atBottom) {
+      messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleMessage = async (e) => {
     e.preventDefault();
@@ -96,6 +112,7 @@ const Chat = () => {
             </p>
           </div>
         ))}
+        <div ref={messageEndRef}></div>
       </div>
       <form className="h-1/8 flex items-center justify-between px-12" onSubmit={handleMessage}>
         <input
