@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import useSocket from "../hooks/useSocket";
 
 export function meta() {
   return [
@@ -16,6 +17,7 @@ const Chat = () => {
   const [user, setUser] = useState("");
   const messageEndRef = useRef();
   const firstLoad = useRef(true);
+  const socket = useSocket(user);
 
   useEffect(() => {
     const fetchChat = async () => {
@@ -53,6 +55,18 @@ const Chat = () => {
       }
     }
   }, [messagesList]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("newMessage", (message) => {
+      setMessagesList((prev) => [...prev, message]);
+    });
+
+    socket.on("deleteMessage", (messageId) => {
+      setMessagesList((prev) => prev.filter((msg) => (msg._id === messageId ? { ...msg, deleted: true } : msg)));
+    });
+  }, [socket]);
 
   const scrollBottom = (scrollBehavior, check) => {
     const container = messageEndRef.current?.parentElement;

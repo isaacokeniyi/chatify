@@ -42,7 +42,7 @@ export const deleteMessages = async (req, res, next) => {
       return next(new AppError(404, "Message Not Found"));
     await Message.findByIdAndUpdate(id, { deleted: true }, { new: true });
 
-    io.emit("deleteMessage", deletedMessage);
+    io.emit("deleteMessage", deletedMessage._id);
     res.json({ message: "Message deleted" });
   } catch (err) {
     next(err);

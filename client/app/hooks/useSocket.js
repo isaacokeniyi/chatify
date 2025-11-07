@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 const useSocket = (username) => {
   const socketRef = useRef(null);
 
-  if (!socketRef.current) {
+  if (!socketRef.current && username) {
     socketRef.current = io(import.meta.env.VITE_SERVER_URL, {
       auth: { username },
     });
