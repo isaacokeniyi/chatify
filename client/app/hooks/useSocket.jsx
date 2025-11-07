@@ -14,6 +14,8 @@ const useSocket = (username) => {
   const socket = socketRef.current;
 
   useEffect(() => {
+    if (!socket) return;
+
     socket.on("connect", () => {
       toast.success("Connected");
     });
@@ -26,7 +28,9 @@ const useSocket = (username) => {
       socket.off("connect");
       socket.off("disconnect");
     };
-  }, []);
+  }, [socket]);
+
+  return socket;
 };
 
 export default useSocket;
