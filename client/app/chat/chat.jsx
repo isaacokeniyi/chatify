@@ -20,7 +20,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchChat = async () => {
       try {
-        let token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
         if (!token) return navigate("/login");
 
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
@@ -68,7 +68,7 @@ const Chat = () => {
   const handleMessage = async (e) => {
     e.preventDefault();
     try {
-      let token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
         method: "POST",
@@ -84,6 +84,7 @@ const Chat = () => {
       }
 
       setMessage("");
+      scrollBottom("smooth");
       toast.success(data.message);
     } catch (error) {
       console.error(error);
