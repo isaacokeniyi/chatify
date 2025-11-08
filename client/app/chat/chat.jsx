@@ -60,7 +60,7 @@ const Chat = () => {
     if (!socket) return;
 
     socket.on("newMessage", (message) => {
-      setMessagesList((prev) => [...prev, message]);
+      setMessagesList((prev) => [...prev, message._doc]);
     });
 
     socket.on("deleteMessage", (messageId) => {
