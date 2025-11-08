@@ -105,6 +105,29 @@ const Chat = () => {
     }
   };
 
+  const handleDeleteMessage = async (e, messageId) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages/${messageId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        navigate("/login");
+        return toast.error(data.message);
+      }
+
+      toast.success(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
