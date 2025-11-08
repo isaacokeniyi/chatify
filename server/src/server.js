@@ -12,14 +12,17 @@ import errorHandler from "./middleware/error.middleware.js";
 dotenv.config({ quiet: true });
 
 const port = process.env.PORT;
-// const corsOrigin = process.env.CORS_ORIGIN;
 
 const app = express();
 const server = http.createServer(app);
 
 connectDB();
 
-const io = new SocketIO(server);
+const io = new SocketIO(server, {
+  cors: {
+    origin: process.env.CORS_ORIGIN,
+  },
+});
 
 app.set("io", io);
 
