@@ -79,7 +79,7 @@ const Chat = () => {
     }
   };
 
-  const handleMessage = async (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
@@ -137,7 +137,7 @@ const Chat = () => {
         ))}
         <div ref={messageEndRef}></div>
       </div>
-      <form className="h-1/8 flex items-center justify-between px-12" onSubmit={handleMessage}>
+      <form className="h-1/8 flex items-center justify-between px-12" onSubmit={handleSendMessage}>
         <input
           type="text"
           value={message}
