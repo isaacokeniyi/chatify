@@ -15,6 +15,7 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
   const [user, setUser] = useState("");
+  const [menuVisible, setMenuVisible] = useState(false);
   const messageEndRef = useRef();
   const firstLoad = useRef(true);
   const socket = useSocket(user);
@@ -128,6 +129,11 @@ const Chat = () => {
     }
   };
 
+  const handleContextMenu = (e, id) => {
+    e.preventDefault();
+    setMenuVisible(true);
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
@@ -146,6 +152,7 @@ const Chat = () => {
         {messagesList.map((msg) => (
           <div
             key={msg._id}
+            onContextMenu={(e) => handleContextMenu(e, msg._id)}
             className={`max-w-3/5 rounded-sm flex flex-col p-2 ${msg.sender === user ? "bg-[#3b82f6] self-end" : "bg-[#e5e5ea] self-start"}`}
           >
             <strong className={` ${msg.sender === user ? "text-[#4f0099]" : "text-[#9333ea]"}`}>
