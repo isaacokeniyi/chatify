@@ -15,6 +15,7 @@ const Chat = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
+  const [selectedMessageId, setSelectedMessageId] = useState();
   const [user, setUser] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const messageEndRef = useRef();
@@ -107,8 +108,7 @@ const Chat = () => {
     }
   };
 
-  const handleDeleteMessage = async (e, messageId) => {
-    e.preventDefault();
+  const handleDeleteMessage = async (messageId) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -133,6 +133,7 @@ const Chat = () => {
   const handleContextMenu = (e, id) => {
     e.preventDefault();
     setMenuVisible(true);
+    setSelectedMessageId(id);
   };
 
   const handleLogout = () => {
@@ -143,7 +144,9 @@ const Chat = () => {
 
   return (
     <main className="h-screen flex flex-col">
-      {menuVisible && <ContextMenu close={() => setMenuVisible(false)} />}
+      {menuVisible && (
+        <ContextMenu close={() => setMenuVisible(false)} deleteMsg={() => handleDeleteMessage(selectedMessageId)} />
+      )}
       <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white">
         <p className="text-2xl"> Global Chat</p>
         <button onClick={handleLogout} className="px-2 py-1 rounded-sm bg-red-500 hover:bg-red-600">
