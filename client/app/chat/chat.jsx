@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useSocket from "../hooks/useSocket";
+import ContextMenu from "../components/ContextMenu";
 
 export function meta() {
   return [
@@ -142,6 +143,7 @@ const Chat = () => {
 
   return (
     <main className="h-screen flex flex-col">
+      {menuVisible && <ContextMenu close={() => setMenuVisible(false)} />}
       <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white">
         <p className="text-2xl"> Global Chat</p>
         <button onClick={handleLogout} className="px-2 py-1 rounded-sm bg-red-500 hover:bg-red-600">
