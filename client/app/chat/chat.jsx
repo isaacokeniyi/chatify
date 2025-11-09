@@ -67,8 +67,13 @@ const Chat = () => {
     });
 
     socket.on("deleteMessage", (messageId) => {
-      setMessagesList((prev) => prev.filter((msg) => (msg._id === messageId ? { ...msg, deleted: true } : msg)));
+      setMessagesList((prev) => prev.map((msg) => (msg._id === messageId ? { ...msg, deleted: true } : msg)));
     });
+
+    return () => {
+      socket.off("newMessage");
+      socket.off("deleteMessage");
+    };
   }, [socket]);
 
   const scrollBottom = (scrollBehavior, check) => {
@@ -166,7 +171,7 @@ const Chat = () => {
             <p
               className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"} ${msg.deleted ? "opacity-50" : ""}`}
             >
-              {msg.message}
+              {msg.deleted ? "This message has been deleted" : msg.message}
             </p>
           </div>
         ))}
