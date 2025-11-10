@@ -16,8 +16,6 @@ const port = process.env.PORT;
 const app = express();
 const server = http.createServer(app);
 
-connectDB();
-
 const io = new SocketIO(server, {
   cors: {
     origin: process.env.CORS_ORIGIN,
@@ -43,6 +41,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+connectDB().then(() => {
+  server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 });
