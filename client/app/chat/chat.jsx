@@ -171,7 +171,7 @@ const Chat = () => {
             <p
               className={`wrap-break-word pr-4 ${msg.sender === user ? "text-white" : "text-black"} ${msg.deleted ? "opacity-50" : ""}`}
             >
-              {msg.deleted ? "This message has been deleted" : msg.message}
+              {msg.deleted ? `${msg.sender} deleted this message` : msg.message}
             </p>
           </div>
         ))}
