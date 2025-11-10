@@ -6,9 +6,11 @@ import AppError from "../utils/AppError.js";
 export const registerUser = async (req, res, next) => {
   try {
     const { username, email, password, logMeIn } = req.body;
+    const lowerUsername = username.toLowerCase();
+    const lowerEmail = email.toLowerCase();
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username: lowerUsername, email: lowerEmail, password: hashedPassword });
     await newUser.save();
 
     if (logMeIn) {
