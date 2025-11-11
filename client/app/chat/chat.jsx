@@ -142,6 +142,7 @@ const Chat = () => {
   };
 
   const handleLogout = () => {
+    socket.disconnect();
     localStorage.clear();
     navigate("/login");
     toast.success("Successfully Logged Out");
