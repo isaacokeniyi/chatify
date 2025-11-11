@@ -14,7 +14,7 @@ const authenticateToken = async (req, res, next) => {
     if (!payload.id) return next(new AppError(401, "Invalid Token"));
 
     const user = await User.findById(payload.id);
-    if (!user) return next(new AppError(404, "User Not Found"));
+    if (!user) return next(new AppError(401, "Invalid User"));
 
     req.user = user._id.toString();
 

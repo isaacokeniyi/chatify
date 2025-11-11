@@ -101,13 +101,18 @@ const Chat = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        navigate("/login");
-        return toast.error(data.message);
+        toast.error(data.message);
+
+        if (res.status === 401) {
+          return navigate("/login");
+        }
       }
 
-      setMessage("");
-      scrollBottom("smooth");
-      toast.success(data.message);
+      if (res.ok) {
+        setMessage("");
+        scrollBottom("smooth");
+        toast.success(data.message);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -125,11 +130,16 @@ const Chat = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        navigate("/login");
-        return toast.error(data.message);
+        toast.error(data.message);
+
+        if (res.status === 401) {
+          return navigate("/login");
+        }
       }
 
-      toast.success(data.message);
+      if (res.ok) {
+        toast.success(data.message);
+      }
     } catch (error) {
       console.error(error);
     }

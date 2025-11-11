@@ -39,7 +39,7 @@ export const deleteMessages = async (req, res, next) => {
     const deletedMessage = await Message.findById(id);
 
     if (!deletedMessage || deletedMessage.senderId.toString() !== user)
-      return next(new AppError(404, "Message Not Found"));
+      return next(new AppError(403, "You can only delete your messages"));
     await Message.findByIdAndUpdate(id, { deleted: true }, { new: true });
 
     io.emit("deleteMessage", deletedMessage._id);
