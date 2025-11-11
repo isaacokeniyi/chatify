@@ -37,12 +37,13 @@ const Login = () => {
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="username" className="block text-gray-700">
+          <label htmlFor="identifier" className="block text-gray-700">
             Username or Email
           </label>
           <input
             type="text"
-            id="username"
+            id="identifier"
+            required
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             placeholder="Enter your username or email"
@@ -56,6 +57,7 @@ const Login = () => {
           <input
             type="password"
             id="password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"

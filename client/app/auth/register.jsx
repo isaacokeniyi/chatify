@@ -50,6 +50,9 @@ const Register = () => {
           <input
             type="text"
             id="username"
+            required
+            pattern="^[a-zA-Z0-9_]{3,16}$"
+            title="Username must be 3-16 characters and can only contain letter, numbers or underscores"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="john doe"
@@ -61,8 +64,9 @@ const Register = () => {
             Email
           </label>
           <input
-            type="text"
+            type="email"
             id="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@example.com"
@@ -76,6 +80,7 @@ const Register = () => {
           <input
             type="password"
             id="password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
