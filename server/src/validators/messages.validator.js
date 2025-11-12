@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import sanitizeHtml from "sanitize-html";
 
 const sanitizeInput = (input) =>
@@ -15,4 +15,8 @@ export const sendMessageValidator = [
     .isLength({ max: 500 })
     .withMessage("Message can not exceed 500 characters")
     .customSanitizer(sanitizeInput),
+];
+
+export const deleteMessageValidator = [
+  param("id").trim().notEmpty().withMessage("No message Id").customSanitizer(sanitizeInput).isMongoId(),
 ];
