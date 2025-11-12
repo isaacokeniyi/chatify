@@ -9,6 +9,9 @@ const errorHandler = (err, req, res, next) => {
     const value = err.keyValue[field];
 
     payload = { status: "fail", message: `The ${field} '${value}' is already in use` };
+  } else if (err.name === "ValidationError") {
+    status = 400;
+    payload = { status: "fail", message: "Message can not be empty" };
   } else if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     status = 400;
     payload = { status: "fail", message: "Malformed JSON Body" };
