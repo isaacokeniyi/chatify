@@ -7,7 +7,7 @@ const sanitizeInput = (input) =>
     allowedAttributes: {},
   });
 
-export const messageValidator = [
+export const sendMessageValidator = [
   body("message")
     .trim()
     .notEmpty()

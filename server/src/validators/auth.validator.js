@@ -13,7 +13,7 @@ export const registerValidator = [
     .matches(/^[a-zA-Z0-9_]{3,16}$/)
     .withMessage("Username must be 3-16 characters and can only contain letter, numbers or underscores")
     .customSanitizer(sanitizeInput),
-  body("email").isEmail().withMessage("Invalid Email Address").normalizeEmail().customSanitizer(sanitizeInput),
+  body("email").trim().isEmail().withMessage("Invalid Email Address").normalizeEmail().customSanitizer(sanitizeInput),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 characters")
