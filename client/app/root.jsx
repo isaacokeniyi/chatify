@@ -1,6 +1,7 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./app.css";
 
@@ -28,6 +29,7 @@ export function Layout({ children }) {
       </head>
       <body>
         {children}
+        <Analytics />
         <ToastContainer autoClose={3000} newestOnTop />
         <ScrollRestoration />
         <Scripts />
