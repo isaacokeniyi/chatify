@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.route.js";
 import usersRoutes from "./routes/users.route.js";
 import messagesRoutes from "./routes/messages.route.js";
 import errorHandler from "./middleware/error.middleware.js";
+import { rateLimiter } from "./middleware/limiter.middleware.js";
 
 dotenv.config({ quiet: true });
 
@@ -26,6 +27,7 @@ app.set("io", io);
 
 app.use(express.json());
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(rateLimiter);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/chat", messagesRoutes);
