@@ -42,7 +42,7 @@ const Chat = () => {
         setMessagesList(data);
         setUser(localStorage.getItem("user"));
       } catch (error) {
-        console.error(error.message);
+        // console.error(error.message);
       }
     };
     fetchChat();
@@ -114,7 +114,7 @@ const Chat = () => {
         toast.success(data.message);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -141,7 +141,7 @@ const Chat = () => {
         toast.success(data.message);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

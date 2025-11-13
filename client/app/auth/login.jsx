@@ -28,7 +28,7 @@ const Login = () => {
       localStorage.setItem("user", data.username);
       navigate("/chat");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 
