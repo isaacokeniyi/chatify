@@ -25,7 +25,7 @@ const io = new SocketIO(server, {
 app.set("io", io);
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/chat", messagesRoutes);
