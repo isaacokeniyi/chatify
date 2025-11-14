@@ -89,11 +89,11 @@ const Chat = () => {
   };
 
   const handleSendMessage = async (e) => {
+    e.preventDefault();
     if (!canSend) {
       return toast.warn("Hold on, still processing last message");
     }
     setCanSend(false);
-    e.preventDefault();
     try {
       const token = localStorage.getItem("token");
 
