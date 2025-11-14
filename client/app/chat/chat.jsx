@@ -80,7 +80,7 @@ const Chat = () => {
     const container = messageEndRef.current?.parentElement;
     if (!container) return;
 
-    const atBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 50;
+    const atBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
 
     if (atBottom || !check) {
       messageEndRef.current?.scrollIntoView({ behavior: scrollBehavior });
