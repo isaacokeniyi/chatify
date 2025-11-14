@@ -18,6 +18,7 @@ const Chat = () => {
   const [selectedMessageId, setSelectedMessageId] = useState();
   const [user, setUser] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
+  const [canSend, setCanSend] = useState(true);
   const messageEndRef = useRef();
   const firstLoad = useRef(true);
   const socket = useSocket(user);
@@ -88,6 +89,10 @@ const Chat = () => {
   };
 
   const handleSendMessage = async (e) => {
+    if (!canSend) {
+      return toast.warn("Hold on, still processing last message");
+    }
+    setCanSend(false);
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
@@ -112,6 +117,7 @@ const Chat = () => {
         setMessage("");
         scrollBottom("smooth");
         toast.success(data.message);
+        setCanSend(true);
       }
     } catch (error) {
       // console.error(error);

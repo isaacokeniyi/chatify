@@ -44,5 +44,7 @@ Contributions are welcome
 - Page for account management
 - Timestamps for messages
 - Sound for new messages
+- Typing indicator
+- Online users indicators
 
 This project was developed by [**Isaac Okeniyi**](https://github.com/isaacokeniyi/) to demonstrate full-stack skills.
