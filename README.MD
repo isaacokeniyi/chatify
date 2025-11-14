@@ -42,5 +42,7 @@ Contributions are welcome
 ## **UPCOMING UPDATES**
 
 - Page for account management
+- Timestamps for messages
+- Sound for new messages
 
 This project was developed by [**Isaac Okeniyi**](https://github.com/isaacokeniyi/) to demonstrate full-stack skills.

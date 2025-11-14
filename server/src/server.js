@@ -24,6 +24,7 @@ const io = new SocketIO(server, {
 });
 
 app.set("io", io);
+app.set("trust proxy", true);
 
 app.use(express.json());
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
