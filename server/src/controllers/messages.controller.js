@@ -31,6 +31,20 @@ export const sendMessages = async (req, res, next) => {
   }
 };
 
+export const editMessages = async (req, res, next) => {
+  try {
+    const io = req.app.get("io");
+    const { id: messageId } = req.params;
+    const { message } = req.body;
+    const editedMessage = await Message.findByIdAndUpdate(messageId, { message }, { new: true });
+    const { senderId: sId, ...rest } = editedMessage;
+    io.emit("editMessage", rest);
+    res.status(200).json({ message: "Message Edited" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const deleteMessages = async (req, res, next) => {
   try {
     const io = req.app.get("io");

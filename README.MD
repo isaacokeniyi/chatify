@@ -46,5 +46,6 @@ Contributions are welcome
 - Sound for new messages
 - Typing indicator
 - Online users indicators
+- Ability to update messages up to 3 minutes after it was sent
 
 This project was developed by [**Isaac Okeniyi**](https://github.com/isaacokeniyi/) to demonstrate full-stack skills.
