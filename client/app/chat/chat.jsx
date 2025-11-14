@@ -117,10 +117,11 @@ const Chat = () => {
         setMessage("");
         scrollBottom("smooth");
         toast.success(data.message);
-        setCanSend(true);
       }
     } catch (error) {
       // console.error(error);
+    } finally {
+      setCanSend(true);
     }
   };
 
