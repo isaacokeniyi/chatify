@@ -38,7 +38,7 @@ export const editMessages = async (req, res, next) => {
     const { message } = req.body;
     const messageToEdit = await Message.findById(messageId);
 
-    timeDiff = new Date.now() - messageToEdit.createdAt;
+    const timeDiff = new Date() - messageToEdit.createdAt;
     if (timeDiff > 3 * 60 * 1000) return next(new AppError(400, "You can no longer edit this message"));
 
     const editedMessage = await Message.findByIdAndUpdate(messageId, { message }, { new: true });
@@ -62,7 +62,7 @@ export const deleteMessages = async (req, res, next) => {
       return next(new AppError(403, "You can only delete your messages"));
     }
 
-    timeDiff = new Date.now() - deletedMessage.createdAt;
+    const timeDiff = new Date() - deletedMessage.createdAt;
     if (timeDiff > 20 * 60 * 1000) return next(new AppError(400, "You can no longer delete this message"));
 
     await Message.findByIdAndUpdate(id, { deleted: true }, { new: true });

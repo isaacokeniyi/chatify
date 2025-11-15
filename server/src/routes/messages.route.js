@@ -14,7 +14,7 @@ router.use(authenticateToken);
 
 router.get("/messages", fetchMessages);
 router.post("/messages", sendMessageValidator, validate, sendMessages);
-router.patch("/messages", editMessageValidator, validate, editMessages);
+router.patch("/messages/:id", editMessageValidator, validate, editMessages);
 router.delete("/messages/:id", deleteMessageValidator, deleteMessages);
 
 export default router;

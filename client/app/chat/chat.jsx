@@ -19,6 +19,7 @@ const Chat = () => {
   const [user, setUser] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
   const [canSend, setCanSend] = useState(true);
+  const [editMode, setEditMode] = useState(false);
   const messageEndRef = useRef();
   const firstLoad = useRef(true);
   const socket = useSocket(user);
@@ -125,7 +126,7 @@ const Chat = () => {
     }
   };
 
-  const handleEditMessage = async (e) => {
+  const handleEditMessage = async (e, messageId) => {
     e.preventDefault();
     if (!canSend) {
       return toast.warn("Hold on, still processing last message");
@@ -134,7 +135,7 @@ const Chat = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages/${messageId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ message }),
@@ -151,10 +152,12 @@ const Chat = () => {
 
       if (res.ok) {
         setMessage("");
+        setEditMode(false);
         scrollBottom("smooth", "check");
         toast.success(data.message);
       }
     } catch (error) {
+      console.error(error);
     } finally {
       setCanSend(true);
     }
@@ -203,7 +206,14 @@ const Chat = () => {
   return (
     <main className="h-screen flex flex-col">
       {menuVisible && (
-        <ContextMenu close={() => setMenuVisible(false)} deleteMsg={() => handleDeleteMessage(selectedMessageId)} />
+        <ContextMenu
+          close={() => setMenuVisible(false)}
+          deleteMsg={() => handleDeleteMessage(selectedMessageId)}
+          editMsg={() => {
+            setEditMode(true);
+            setMessage(messagesList.find((msg) => msg._id === selectedMessageId).message);
+          }}
+        />
       )}
       <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white">
         <p className="text-2xl"> Global Chat</p>
@@ -230,7 +240,10 @@ const Chat = () => {
         ))}
         <div ref={messageEndRef}></div>
       </div>
-      <form className="h-1/8 flex items-center justify-between px-12" onSubmit={handleSendMessage}>
+      <form
+        className="h-1/8 flex items-center justify-between px-12"
+        onSubmit={editMode ? (e) => handleEditMessage(e, selectedMessageId) : handleSendMessage}
+      >
         <input
           type="text"
           value={message}
@@ -239,7 +252,7 @@ const Chat = () => {
           className="w-17/20 h-12 rounded-lg px-4 text-[#333333] border border-[#d1d5db]"
         />
         <button type="submit" className="px-4 py-2 rounded-md bg-[#9333ea] text-white hover:bg-[#7622c6]">
-          SEND
+          {editMode ? "EDIT" : "SEND"}
         </button>
       </form>
     </main>
