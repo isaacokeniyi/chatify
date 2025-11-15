@@ -36,7 +36,13 @@ export const editMessages = async (req, res, next) => {
     const io = req.app.get("io");
     const { id: messageId } = req.params;
     const { message } = req.body;
+    const messageToEdit = await Message.findById(messageId);
+
+    timeDiff = new Date.now() - messageToEdit.createdAt;
+    if (timeDiff > 180000) return next(new AppError(400, "You can no longer edit this message"));
+
     const editedMessage = await Message.findByIdAndUpdate(messageId, { message }, { new: true });
+
     const { senderId: sId, ...rest } = editedMessage;
     io.emit("editMessage", rest);
     res.status(200).json({ message: "Message Edited" });
