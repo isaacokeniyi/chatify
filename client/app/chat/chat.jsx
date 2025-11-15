@@ -72,9 +72,14 @@ const Chat = () => {
       setMessagesList((prev) => prev.map((msg) => (msg._id === messageId ? { ...msg, deleted: true } : msg)));
     });
 
+    socket.on("editMessage", (message) => {
+      setMessagesList((prev) => prev.map((msg) => (msg._id === message._doc._id ? { ...msg, ...message._doc } : msg)));
+    });
+
     return () => {
       socket.off("newMessage");
       socket.off("deleteMessage");
+      socket.off("editMessage");
     };
   }, [socket]);
 
@@ -157,7 +162,7 @@ const Chat = () => {
         toast.success(data.message);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     } finally {
       setCanSend(true);
     }
