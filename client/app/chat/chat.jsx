@@ -125,6 +125,41 @@ const Chat = () => {
     }
   };
 
+  const handleEditMessage = async (e) => {
+    e.preventDefault();
+    if (!canSend) {
+      return toast.warn("Hold on, still processing last message");
+    }
+    setCanSend(false);
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/chat/messages`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+        if (res.status === 401) {
+          return navigate("/login");
+        }
+      }
+
+      if (res.ok) {
+        setMessage("");
+        scrollBottom("smooth", "check");
+        toast.success(data.message);
+      }
+    } catch (error) {
+    } finally {
+      setCanSend(true);
+    }
+  };
+
   const handleDeleteMessage = async (messageId) => {
     try {
       const token = localStorage.getItem("token");
