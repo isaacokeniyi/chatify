@@ -241,6 +241,9 @@ const Chat = () => {
             >
               {msg.deleted ? `${msg.sender === user ? "You" : msg.sender} deleted this message` : msg.message}
             </p>
+            <p className="text-xs text-gray-800 text-right">
+              {msg.deleted ? "" : msg.createdAt === msg.updatedAt ? "" : "edited"}{" "}
+            </p>
           </div>
         ))}
         <div ref={messageEndRef}></div>

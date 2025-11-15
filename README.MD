@@ -30,7 +30,9 @@ Chatify is a full-stack global chat app for users to send and recieve messages i
 
 - Sign up / login
 - Send and view message from other users
-- Right-click on a message to delete
+- Right-click on a message to delete / edit the message
+- There are time limits for deleting (20 mins) and editing (3 mins) messages
+- Markers for deleted or edited messages
 
 ## **CONTRIBUTING**
 
@@ -46,6 +48,5 @@ Contributions are welcome
 - Sound for new messages
 - Typing indicator
 - Online users indicators
-- Ability to update messages up to 3 minutes after it was sent
 
 This project was developed by [**Isaac Okeniyi**](https://github.com/isaacokeniyi/) to demonstrate full-stack skills.

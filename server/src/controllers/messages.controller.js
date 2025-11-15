@@ -6,8 +6,15 @@ export const fetchMessages = async (req, res, next) => {
     const messages = await Message.find({});
 
     const formattedMessages = messages.map((msg) => {
-      const { _id, sender, message, deleted, createdAt } = msg;
-      return { _id, sender, deleted, message: deleted ? "This message has been deleted" : message, createdAt };
+      const { _id, sender, message, deleted, createdAt, updatedAt } = msg;
+      return {
+        _id,
+        sender,
+        deleted,
+        message: deleted ? "This message has been deleted" : message,
+        createdAt,
+        updatedAt,
+      };
     });
 
     res.json(formattedMessages);
