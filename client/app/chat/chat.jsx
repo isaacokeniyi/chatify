@@ -256,9 +256,27 @@ const Chat = () => {
           placeholder="Write a message"
           className="w-17/20 h-12 rounded-lg px-4 text-[#333333] border border-[#d1d5db]"
         />
-        <button type="submit" className="px-4 py-2 rounded-md bg-[#9333ea] text-white hover:bg-[#7622c6]">
-          {editMode ? "EDIT" : "SEND"}
-        </button>
+        {editMode ? (
+          <div className="flex gap-2 justify-center items-center">
+            <button
+              type="submit"
+              className="px-4 py-2 rounded bg-green-600 text-white font-extrabold hover:bg-green-500"
+            >
+              &#10003;
+            </button>
+            <button
+              type="reset"
+              className="px-4 py-2 rounded bg-red-600 text-white font-extrabold hover:bg-red-500"
+              onClick={() => setEditMode(false)}
+            >
+              X
+            </button>
+          </div>
+        ) : (
+          <button type="submit" className="px-4 py-2 rounded-md bg-[#9333ea] text-white hover:bg-[#7622c6]">
+            SEND
+          </button>
+        )}
       </form>
     </main>
   );
