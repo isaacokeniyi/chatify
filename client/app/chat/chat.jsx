@@ -267,7 +267,10 @@ const Chat = () => {
             <button
               type="reset"
               className="px-4 py-2 rounded bg-red-600 text-white font-extrabold hover:bg-red-500"
-              onClick={() => setEditMode(false)}
+              onClick={() => {
+                setEditMode(false);
+                setMessage("");
+              }}
             >
               X
             </button>
