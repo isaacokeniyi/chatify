@@ -14,6 +14,7 @@ Chatify is a full-stack global chat app for users to send and recieve messages i
 
 - Global messaging
 - Real-time communication
+- Sound indicators for new messages
 - Authentication
 - Rate limiting
 
@@ -46,7 +47,6 @@ Contributions are welcome
 
 - Page for account management
 - Timestamps for messages
-- Sound for new messages
 - Typing indicator
 - Online users indicators
 
