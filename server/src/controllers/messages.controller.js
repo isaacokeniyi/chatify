@@ -3,7 +3,7 @@ import AppError from "../utils/AppError.js";
 
 export const fetchMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find({});
+    const messages = (await Message.find().sort({ createdAt: -1 }).limit(50)).reverse();
 
     const formattedMessages = messages.map((msg) => {
       const { _id, sender, message, deleted, createdAt, updatedAt } = msg;
