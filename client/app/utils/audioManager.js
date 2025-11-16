@@ -10,7 +10,7 @@ const playSound = (name) => {
   if (!audio) return;
 
   audio.currentTime = 0;
-  audio.play();
+  audio.play().catch(() => {});
 };
 
 export default playSound;
