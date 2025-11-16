@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useSocket from "../hooks/useSocket";
 import ContextMenu from "../components/ContextMenu";
+import playSound from "../utils/audioManager";
 
 export function meta() {
   return [
@@ -66,6 +67,7 @@ const Chat = () => {
 
     socket.on("newMessage", (message) => {
       setMessagesList((prev) => [...prev, message._doc]);
+      playSound("newMessage");
     });
 
     socket.on("deleteMessage", (messageId) => {
