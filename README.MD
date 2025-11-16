@@ -30,6 +30,7 @@ Chatify is a full-stack global chat app for users to send and recieve messages i
 
 - Sign up / login
 - Send and view message from other users
+- Upon login you can view up to the last 50 messages
 - Right-click on a message to delete / edit the message
 - There are time limits for deleting (20 mins) and editing (3 mins) messages
 - Markers for deleted or edited messages
