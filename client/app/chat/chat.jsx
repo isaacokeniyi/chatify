@@ -197,6 +197,11 @@ const Chat = () => {
     }
   };
 
+  const handleCopyMessage = () => {
+    navigator.clipboard.writeText(messagesList.find((msg) => msg._id === selectedMessageId).message);
+    toast.success("Copied");
+  };
+
   const handleContextMenu = (e, id) => {
     e.preventDefault();
     setMenuVisible(true);
@@ -220,6 +225,7 @@ const Chat = () => {
             setEditMode(true);
             setMessage(messagesList.find((msg) => msg._id === selectedMessageId).message);
           }}
+          copyMsg={() => handleCopyMessage()}
         />
       )}
       <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white">
