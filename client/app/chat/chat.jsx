@@ -216,7 +216,7 @@ const Chat = () => {
   };
 
   return (
-    <main className="h-screen flex flex-col">
+    <main className="h-dvh flex flex-col">
       {menuVisible && (
         <ContextMenu
           close={() => setMenuVisible(false)}
