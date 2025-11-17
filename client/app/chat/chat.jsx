@@ -228,8 +228,8 @@ const Chat = () => {
           copyMsg={() => handleCopyMessage()}
         />
       )}
-      <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white">
-        <p className="text-2xl"> Global Chat</p>
+      <div className="h-1/8 flex items-center justify-between px-12 bg-[#3b82f6] text-white max-sm:px-6">
+        <p className="text-2xl max-sm:text-xl"> Global Chat</p>
         <button onClick={handleLogout} className="px-2 py-1 rounded-sm bg-red-500 hover:bg-red-600">
           Log out
         </button>
@@ -257,7 +257,7 @@ const Chat = () => {
         <div ref={messageEndRef}></div>
       </div>
       <form
-        className="h-1/8 flex items-center justify-between px-12"
+        className="h-1/8 flex items-center justify-between px-12 max-sm:px-4"
         onSubmit={editMode ? (e) => handleEditMessage(e, selectedMessageId) : handleSendMessage}
       >
         <input
@@ -265,7 +265,7 @@ const Chat = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Write a message"
-          className="w-17/20 h-12 rounded-lg px-4 text-[#333333] border border-[#d1d5db]"
+          className="w-17/20 h-12 rounded-lg px-4 text-[#333333] border border-[#d1d5db] max-sm:px-2 max-sm:h-10 max-sm:w-14/20"
         />
         {editMode ? (
           <div className="flex gap-2 justify-center items-center">

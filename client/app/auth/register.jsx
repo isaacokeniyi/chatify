@@ -40,11 +40,11 @@ const Register = () => {
   };
 
   return (
-    <main className="w-md p-8 rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN UP</h2>
+    <main className="w-md p-8 rounded-lg shadow-lg bg-white max-md:w-sm max-sm:w-[75vw] max-sm:p-4">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 max-sm:text-lg">SIGN UP</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="username" className="block text-gray-700">
+          <label htmlFor="username" className="block text-gray-700 max-sm:text-sm">
             Username
           </label>
           <input
@@ -56,11 +56,11 @@ const Register = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="john doe"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:text-sm"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-gray-700">
+          <label htmlFor="email" className="block text-gray-700 max-sm:text-sm">
             Email
           </label>
           <input
@@ -70,11 +70,11 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="johndoe@example.com"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:text-sm"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-gray-700">
+          <label htmlFor="password" className="block text-gray-700 max-sm:text-sm">
             Password
           </label>
           <input
@@ -84,10 +84,10 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:text-sm"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-sm:text-sm">
           <input type="checkbox" id="logMeIn" checked={logMeIn} onChange={(e) => setLogMeIn(e.target.checked)} />
           <label htmlFor="logMeIn">Log Me In</label>
         </div>
@@ -99,7 +99,7 @@ const Register = () => {
           REGISTER
         </button>
       </form>
-      <p className="mt-4 text-center text-gray-600">
+      <p className="mt-4 text-center text-gray-600 max-sm:text-sm">
         Already have an account?{" "}
         <Link to="/login" className="text-blue-500 hover:text-blue-600 font-semibold">
           Login here

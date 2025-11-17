@@ -33,11 +33,11 @@ const Login = () => {
   };
 
   return (
-    <main className="w-md p-8 rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">SIGN IN</h2>
+    <main className="w-md p-8 rounded-lg shadow-lg bg-white max-md:w-sm max-sm:w-[75vw] max-sm:p-4">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 max-sm:text-lg">SIGN IN</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="identifier" className="block text-gray-700">
+          <label htmlFor="identifier" className="block text-gray-700 max-sm:text-sm">
             Username or Email
           </label>
           <input
@@ -46,12 +46,12 @@ const Login = () => {
             required
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
-            placeholder="Enter your username or email"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter username or email"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:text-sm"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-gray-700">
+          <label htmlFor="password" className="block text-gray-700 max-sm:text-sm">
             Password
           </label>
           <input
@@ -61,7 +61,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 max-sm:text-sm"
           />
         </div>
         <button
@@ -71,7 +71,7 @@ const Login = () => {
           LOGIN
         </button>
       </form>
-      <p className="mt-4 text-center text-gray-600">
+      <p className="mt-4 text-center text-gray-600 max-sm:text-sm">
         Don't have an account?{" "}
         <Link to="/register" className="text-blue-500 hover:text-blue-600 font-semibold">
           Register here
