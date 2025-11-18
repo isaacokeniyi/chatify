@@ -50,5 +50,6 @@ Contributions are welcome
 - Timestamps for messages
 - Typing indicator
 - Online users indicators
+- List of online users
 
 This project was developed by [**Isaac Okeniyi**](https://github.com/isaacokeniyi/) to demonstrate full-stack skills.
