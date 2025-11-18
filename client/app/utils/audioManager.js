@@ -5,6 +5,7 @@ const unlockAudio = () => {
   };
 
   Object.values(sounds).forEach((audio) => {
+    audio.volume = 0.05;
     audio.play().catch(() => {});
   });
 
@@ -21,6 +22,7 @@ const playSound = (name) => {
   const audio = sounds[name];
   if (!audio) return;
 
+  audio.volume = 1;
   audio.currentTime = 0;
   audio.play().catch(() => {});
 };
