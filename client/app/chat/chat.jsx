@@ -249,9 +249,12 @@ const Chat = () => {
             >
               {msg.deleted ? `${msg.sender === user ? "You" : msg.sender} deleted this message` : msg.message}
             </p>
-            <p className="text-xs text-gray-800 text-right">
-              {msg.deleted ? "" : msg.createdAt === msg.updatedAt ? "" : "edited"}{" "}
-            </p>
+            <div className="flex justify-between">
+              <p className="text-xs text-gray-800 text-right">
+                {msg.deleted ? "" : msg.createdAt === msg.updatedAt ? "" : "edited"}{" "}
+              </p>
+              <p className="text-xs text-gray-800 text-left">{msg.createdAt.slice(11, 16)}</p>
+            </div>
           </div>
         ))}
         <div ref={messageEndRef}></div>
