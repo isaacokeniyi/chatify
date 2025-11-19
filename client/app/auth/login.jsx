@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
@@ -31,6 +31,10 @@ const Login = () => {
       // console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/wake`).catch(() => {});
+  }, []);
 
   return (
     <main className="w-md p-8 rounded-lg shadow-lg bg-white max-md:w-sm max-sm:w-[75vw] max-sm:p-4">
