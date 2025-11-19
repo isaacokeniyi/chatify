@@ -32,6 +32,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/chat", messagesRoutes);
 
+app.get("/wake", (req, res) => {
+  res.status(204).end();
+});
+
 app.use(errorHandler);
 
 io.on("connection", (socket) => {
