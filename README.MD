@@ -47,7 +47,6 @@ Contributions are welcome
 ## **UPCOMING UPDATES**
 
 - Page for account management
-- Timestamps for messages
 - Typing indicator
 - Online users indicators
 - List of online users
